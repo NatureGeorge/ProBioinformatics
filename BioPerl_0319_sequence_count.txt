@@ -1,0 +1,5 @@
+The frequency of base in NM_000546.5_cds_NP_000537.3_1 [gene=TP53]
+base:C, count: 366, frequency: 0.31
+base:T, count: 234, frequency: 0.20
+base:A, count: 276, frequency: 0.23
+base:G, count: 306, frequency: 0.26
