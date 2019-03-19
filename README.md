@@ -1,5 +1,6 @@
 # Programming-In-Learning-Bioinformatics-ZeFengZhu
-## Description
-This repository stores the codes that record the user's learning process of programming in computational biology.
-## Main Author
-ZeFengZhu [Soochow University(PRC)]
+## Basic Information
+### Description
+>This repository stores the codes that record the user's learning process of programming in computational biology.
+### Author
+ZeFengZhu [Soochow University(PRC)](http://www.suda.edu.cn/)
