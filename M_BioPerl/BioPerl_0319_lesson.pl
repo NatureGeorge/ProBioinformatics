@@ -8,8 +8,8 @@ use strict;
 my %freq;
 my $count_sum = 0;
 my $cal;
-open(input, '<M-BioPerl\BioPerl_0319_sequence.txt') or die "can not open the file:, $!";
-open(output, '>M-BioPerl\BioPerl_0319_sequence_count.txt');
+open(input, '<BioPerl_0319_sequence.txt') or die "can not open the file:, $!";
+open(output, '>BioPerl_0319_sequence_count.txt');
 print output "The frequency of base in NM_000546.5_cds_NP_000537.3_1 [gene=TP53]\n";
 foreach(<input>)
 {
