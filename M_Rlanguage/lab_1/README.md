@@ -1,1 +1,1 @@
-# The code in this file is to finish some requirements of homework.
+# The code in this file is to finish some requirements of [Lab 1.docx].
