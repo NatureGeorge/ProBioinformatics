@@ -121,7 +121,7 @@ Seq('MAIVMGR*KGARPIV', HasStopCodon(IUPACProtein(), '*'))
 >>> coding_dna = messenger_rna.back_transcribe()
 >>> coding_dna
 Seq('ATGGCCATTGTAATGGGCCGCTGAAAGGGTGCCCGCCCGATAGTA', IUPACUnambiguousDNA())
->>> messenger_rna.translate()
+>>> coding_dna.translate()
 Seq('MAIVMGR*KGARPIV', HasStopCodon(IUPACProtein(), '*'))
 ```
 
@@ -219,7 +219,7 @@ GATC
 
 ```python
 from Bio import SeqIO
-from Bio.SeqRecord import SeqRecord
+from Bio.Alphabet import generic_rna
 from Bio.Seq import Seq
 ```
 
@@ -234,10 +234,13 @@ with open("AY810830.gb", "r") as input_file:
         SeqIO.write(records, output_file, "fasta")
 
 # read and write the file (fasta ->> genebank)
-with open("AY810830_new.gb", "r") as output_file:
-    with open("AY810830.fasta", "w") as intput_file:
-        # 读入单序列: SeqIO.read(), 序列大文件:SeqIO.index()
-        records = SeqIO.parse(input_file, "genbank")
-        SeqIO.write(records, output_file, "fasta")
+with open("AY810830_2.gb", "w") as output_file:
+    with open("AY810830.fasta", "r") as fasta_file:
+        records = SeqIO.read(fasta_file, "fasta")
+        # print(records)
+        print(type(str(records.seq)), str(records.seq))
+        records.seq = Seq(str(records.seq), generic_rna)
+        # print(records)
+        SeqIO.write(records, output_file, "genbank")
 ```
 
