@@ -1,4 +1,4 @@
-# Something about the Matrix in R language
+# 20190327_Note of R language
 Date: 20190327, By: ZeFengZhu
 ## Content
 ## matrix()
@@ -24,14 +24,22 @@ Date: 20190327, By: ZeFengZhu
 [2,]    3    4
 [3,]   56   66
 
-# 一些操作
+```
+
 ## t()
+### Use
+
+```R
 > t(mat)
      [,1] [,2] [,3]
 [1,]    1    3   56
 [2,]    2    4   66
+```
 
 ## solve()
+### Use
+
+```R
 > solve(mat)
 Error in solve.default(mat) : 'a'(3 x 2)必需是正方形的
 > b= matrix(c(1,3,534,66,34,4,6,63,5),3,3)
@@ -40,8 +48,12 @@ Error in solve.default(mat) : 'a'(3 x 2)必需是正方形的
 [1,] -3.885453e-05 -0.0001449937  1.873547e-03
 [2,]  1.593367e-02 -0.0015158005 -2.132261e-05
 [3,] -8.597276e-03  0.0166979714 -7.770906e-05
+```
 
 ## colnames(), rownames()
+### USe
+
+```R
 > colnames(mat) <- c("E","F")
 > rownames(mat) <- c("A","B","C")
 > mat
@@ -64,6 +76,7 @@ E F
 ```
 
 ## sample()
+### Use
 
 ```R
 > hour <- sample(1:12, 6, replace=TRUE)
@@ -82,6 +95,7 @@ E F
 ```
 
 ## data.frame()
+### Use
 
 ```R
 > suburbs <- data.frame(city="Chicago", county="Cook", 
