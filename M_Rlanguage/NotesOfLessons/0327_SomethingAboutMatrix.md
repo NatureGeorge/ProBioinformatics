@@ -199,4 +199,4 @@ Your data frame contains NA values, which is creating problems for you.
 5 NA NA
 ```
 
-## merge() with()
+## merge() with() par() plot() point() grid()
