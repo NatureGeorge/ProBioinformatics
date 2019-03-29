@@ -125,3 +125,78 @@ Levels: Chicago West Dundee
 [1] Chicago     West Dundee
 Levels: Chicago West Dundee
 ```
+
+## subset()
+### Use
+
+```R
+>  library(MASS) 
+>  subset(Cars93, select=Model, subset=(MPG.city > 30)) 
+     Model
+31 Festiva
+39   Metro
+42   Civic
+73  LeMans
+80   Justy
+83   Swift
+84  Tercel
+
+> subset(Cars93, select=c(Model,Min.Price,Max.Price), subset=(Cylinders == 4 & Origin == "USA")) 
+           Model Min.Price Max.Price
+6        Century      14.2      17.3
+12      Cavalier       8.5      18.3
+13       Corsica      11.4      11.4
+15        Lumina      13.4      18.4
+21       LeBaron      14.5      17.1
+23          Colt       7.9      10.6
+24        Shadow       8.4      14.2
+25        Spirit      11.9      14.7
+27       Dynasty      14.8      16.4
+29        Summit       7.9      16.5
+31       Festiva       6.9       7.9
+32        Escort       8.4      11.9
+33         Tempo      10.4      12.2
+34       Mustang      10.8      21.0
+35         Probe      12.8      15.2
+60         Capri      13.3      15.0
+68       Achieva      13.0      14.0
+69 Cutlass_Ciera      14.2      18.4
+72         Laser      11.4      17.4
+73        LeMans       8.2       9.9
+74       Sunbird       9.4      12.8
+79            SL       9.2      12.9
+```
+
+Use the subset function with a negated argument for the select parameter to exclude a column from a data frame using its name:
+
+```R
+> subset(Cars93, select=c(-Model,-Min.Price,-Max.Price))
+```
+
+## na.omit()
+Your data frame contains NA values, which is creating problems for you. 
+### Use
+
+```R
+> x <- c(1, NA, 3, 4, 5) 
+> y <- c(6, 7, NA, 9, 10) 
+> dfrm <- data.frame(x, y) 
+> dfrm <- data.frame(x, y) 
+> cumsum(dfrm) # cannot get what you want 
+   x  y
+1  1  6
+2 NA 13
+3 NA NA
+4 NA NA
+5 NA NA
+>  dfrm2 <- na.omit(dfrm) 
+> cumsum(dfrm)
+   x  y
+1  1  6
+2 NA 13
+3 NA NA
+4 NA NA
+5 NA NA
+```
+
+## merge()
