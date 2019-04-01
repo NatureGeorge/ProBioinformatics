@@ -1,4 +1,4 @@
-# 实验题目： 序列格式转换：Fasta格式专成Genebank格式
+# 实验题目： 序列格式转换：Fasta格式转成Genebank格式
 ## 实验内容
 * 将InputFiles.fasta中的所有序列转换成Genebank的格式
 * 生成Genebank的格式的文件
