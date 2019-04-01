@@ -1,4 +1,9 @@
-
+# 实验题目： 序列格式转换：Fasta格式专成Genebank格式
+## 实验内容
+* 将InputFiles.fasta中的所有序列转换成Genebank的格式
+* 生成Genebank的格式的文件
+* 生成所有序列的综合信息，txt文件保存
+### Import the packages
 
 ```python
 from Bio import SeqIO
@@ -6,6 +11,7 @@ from Bio.Alphabet import generic_dna
 from Bio.Seq import Seq
 ```
 
+### Prepare the input and output files
 
 ```python
 file_in = open('InputFiles.fasta', 'rt')
@@ -14,11 +20,19 @@ file_in = open('InputFiles.fasta', 'rt')
 # file_out_2.write('SeqID\tLength\tIndex[AACACGTGA]\n')
 ```
 
+### Use SeqIO to read the fasta file
+本实验的序列文件为InputFiles.fasta。文件内有多条序列，因此采用SeqIO.parse()来读取。
 
 ```python
 records = SeqIO.parse(file_in, "fasta")
 ```
 
+### Add Alphabet
+读取后生成可迭代的genator对象，使用for循环遍历各个SeqRecord对象，并对各个Seq对象添加Alphabet。本实验中添加的Alphabet为generic_dna。
+
+对Seq对象添加完Alphabet即可利用SeqIO.write(outputFileName,’genbank’)来输出Genebank格式的文件。本实验的genbank格式输出文件名为：OutputGenebank.gb。
+
+在上述for遍历过程中，即利用SeqRecord对象提取seqID、Seq对象的长度以及利用find()得到的index信息。输出文件名为：OutputInfo.txt。
 
 ```python
 for i in records:
