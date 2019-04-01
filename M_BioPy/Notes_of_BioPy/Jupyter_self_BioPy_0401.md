@@ -251,15 +251,3 @@ for i in records:
     
     seqID:I1118	length:302	Index[AACACGTGA]:-1
     
-    
-    
-
-
-```python
-
-```
-
-
-```python
-
-```
