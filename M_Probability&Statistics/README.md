@@ -69,3 +69,49 @@ Summary:
 3. 随机取数问题
 
 ### 条件概率
+$P(B) \ne P(B|A)$
+> 缩小的样本空间:事件$A$的发生改变了样本空间,使它由原来的$S$缩减为新的样本空间$S_A = A$
+
+> 以A的视角来看待B事件: B在A中所占的比例
+#### 定义
+$P(B|A) = \cfrac{P(AB)}{P(A)}, P(A) > 0$
+#### 性质
+$P(\bullet|A)$ 是概率, 因而满足三性:
+* 非负性: $P(B|A) \ge 0$
+* 规范性: $P(S|A) = 1$
+* 可列可加性: $B_1,B_2,...,B_{i}B_{j} = \varnothing, i \ne j \Rightarrow P(\bigcup^{\infty}_{i=1}B_i|A) = \sum^{\infty}_{i=1}P(B_i|A)$
+
+进而满足上述所有的概率性质
+* $P(B|A) = 1 - P(\overline{B}|A)$
+* $P(B \cup C |A) = P(B|A) + P(C|A) - P(BC|A)$
+* $B \supset C \Rightarrow P(B|A) \ge P(C|A)$
+* ...
+
+#### 乘法公式
+$P(AB) = P(A) \cdot P(B|A) = P(B) \cdot P(A|B)$
+$P(A_{1}A_{2}\ldots A_n) = P(A_1)P(A_2|A_1)P(A_3|A_{1}A_2)\ldots P(A_n|A_1\ldots A_{n-1})$
+
+
+### 全概率公式
+#### 定义
+$P(A) = \sum^{n}_{j=1}P(B_j)\cdot P(A|B_j)$
+#### 证明
+$\because A = AS = AB_{1}\cup AB_{2}\cup \ldots \cup AB_n,$
+
+$AB_{i}AB_{j} = \varnothing , i \ne j$
+
+$\therefore P(A) = \sum^{n}_{j=1}P(AB_j) \Leftrightarrow P(A) = \sum^{n}_{j=1}P(B_j)\cdot P(A|B_j)$
+
+#### 样本空间的变换
+若设$P(B_j) = p_j, P(A|B_j) = q_j, j = 1,2,\ldots,n$
+
+则
+$P(A) = \sum^{n}_{j=1}p{j}q_{j}$
+
+### Bayes公式
+#### 定理
+> $设B_1,B_2,\ldots,B_n为S的一个划分且P(B_i) > 0.对P(A) > 0有Bayes公式:$
+
+$P(B_i|A) = \cfrac{P(B_i)P(A|B_i)}{\sum^{n}_{j=1}P(B_j)P(A|B_j)} = \cfrac{p_{i}q_{i}}{\sum^{n}_{j=1}p_{j}q_{j}}$
+
+**分母即为全概率公式，分子由乘法公式得到** ; $P(B_i)$ 为先验概率, $P(B_i|A)$ 为后验概率
