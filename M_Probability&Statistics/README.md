@@ -42,3 +42,4 @@ Summary:
     * $\overline{\bigcap^{n}_{i=1}A_i} = \bigcup^{n}_{i=1}\overline{A_i}$
 
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
