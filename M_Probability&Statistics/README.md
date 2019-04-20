@@ -28,7 +28,7 @@ Summary:
 
 2. 同时发生
     * 积事件
-    * <img src="https://latex.codecogs.com/svg.latex?A \cap B"/>
+    * <img src="https://latex.codecogs.com/svg.latex?A \cap B" title="A \cap B"/>
     * <img src="https://latex.codecogs.com/svg.latex?\bigcap^{n}_{i=1}A_i"/>
 
 3. 都不发生
