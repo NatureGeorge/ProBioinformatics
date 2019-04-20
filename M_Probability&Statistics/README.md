@@ -23,20 +23,49 @@
 Summary:
 1. 至少有一发生
     * 和事件
-    * <img src="https://latex.codecogs.com/svg.latex?A \cup B"/>
-    * <img src="https://latex.codecogs.com/svg.latex?\bigcup^{n}_{i=1}A_i"/>
+    * $A \cup B$
+    * $\bigcup^{n}_{i=1}A_i$
 
 2. 同时发生
     * 积事件
-    * <img src="https://latex.codecogs.com/svg.latex?A \cap B" title="A \cap B"/>
-    * <img src="https://latex.codecogs.com/svg.latex?\bigcap^{n}_{i=1}A_i"/>
+    * $A \cap B$
+    * $\bigcap^{n}_{i=1}A_i$
 
 3. 都不发生
     * 至少有一发生的逆事件
-    * <img src="https://latex.codecogs.com/svg.latex?\overline{A \cup B} = \overline{A} \cap \overline{B}"/>
-    * <img src="https://latex.codecogs.com/svg.latex?\overline{\bigcup^{n}_{i=1}A_i} = \bigcap^{n}_{i=1}\overline{A_i}"/>
+    * $\overline{A \cup B} = \overline{A} \cap \overline{B}$
+    * $\overline{\bigcup^{n}_{i=1}A_i} = \bigcap^{n}_{i=1}\overline{A_i}$
 
 4. 不同时发生 $\Leftrightarrow$ __至少有一事件不发生 $\Leftrightarrow$ 最多有n-1个事件发生__
     * 同时发生的逆事件
-    * <img src="https://latex.codecogs.com/svg.latex?\overline{A \cap B} = \overline{A} \cup \overline{B}"/>
-    * <img src="https://latex.codecogs.com/svg.latex?\overline{\bigcap^{n}_{i=1}A_i} = \bigcup^{n}_{i=1}\overline{A_i}"/>
+    * $\overline{A \cap B} = \overline{A} \cup \overline{B}$
+    * $\overline{\bigcap^{n}_{i=1}A_i} = \bigcup^{n}_{i=1}\overline{A_i}$
+
+## 3.频率
+### 频率的稳定值 -> p -> 概率
+## 4. 概率
+### 概率的统计性定义
+> 当试验的次数增加时,随机事件A发生的频率的稳定值p称为概率,记为P(A) = p
+
+### 概率的公理化定义
+> 设随机试验对应的样本空间为S,对每个事件A定义P(A)满足三公理：
+* 非负性: $P(A) \ge 0$
+* 规范性: $P(S) = 1$
+* 可列可加性: $A_{i}A_{j} = \varnothing, i \ne j \Rightarrow P(\bigcup^{\infty}_{i=1}A_i) = \sum^{\infty}_{i=1}P(A_i)$
+
+#### 公理化定义推导出的性质
+1. $P(\varnothing) = 0$
+2. $P(A) = 1 - P(\overline{A})$
+3. (有限可加性) $A_1,A_2,...,A_n,A_{i}A_{j} = \varnothing, i \ne j \Rightarrow P(\bigcup^{n}_{i=1}A_i) = \sum^{n}_{i=1}P(A_i)$
+4. $A \subset B \Rightarrow P(B-A) = P(B) - P(A) \ge 0$ ; 一般情况: $P(B-A) = P(B) - P(AB)$
+5. 概率加法公式: $P(\bigcup^{n}_{i=1}A_i) = \sum^{n}_{i=1}P(A_i) - \sum_{1 \leq i < j \leq n}P(A_{i}A_{j}) + \sum_{1 \leq i < j \leq k < n}P(A_{i}A_{j}A_{k}) + ... + (-1)^{i-1}P(A_{1}A_{2}...A_{n}))$
+
+### 古典概型(等可能概型)
+样本点有限且等可能
+> 基本就是数数问题
+
+1. 抽球问题(放回/不放回)(考虑顺序/不考虑顺序)
+2. 分房问题
+3. 随机取数问题
+
+### 条件概率
