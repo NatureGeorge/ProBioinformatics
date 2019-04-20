@@ -23,23 +23,20 @@
 Summary:
 1. 至少有一发生
     * 和事件
-    * $A \cup B$
-    * $\bigcup^{n}_{i=1}A_i$
+    * <img src="https://latex.codecogs.com/svg.latex?A \cup B"/>
+    * <img src="https://latex.codecogs.com/svg.latex?\bigcup^{n}_{i=1}A_i"/>
 
 2. 同时发生
     * 积事件
-    * $A \cap B$
-    * $\bigcap^{n}_{i=1}A_i$
+    * <img src="https://latex.codecogs.com/svg.latex?A \cap B"/>
+    * <img src="https://latex.codecogs.com/svg.latex?\bigcap^{n}_{i=1}A_i"/>
 
 3. 都不发生
     * 至少有一发生的逆事件
-    * $\overline{A \cup B} = \overline{A} \cap \overline{B}$
-    * $\overline{\bigcup^{n}_{i=1}A_i} = \bigcap^{n}_{i=1}\overline{A_i}$
+    * <img src="https://latex.codecogs.com/svg.latex?\overline{A \cup B} = \overline{A} \cap \overline{B}"/>
+    * <img src="https://latex.codecogs.com/svg.latex?\overline{\bigcup^{n}_{i=1}A_i} = \bigcap^{n}_{i=1}\overline{A_i}"/>
 
 4. 不同时发生 $\Leftrightarrow$ __至少有一事件不发生 $\Leftrightarrow$ 最多有n-1个事件发生__
     * 同时发生的逆事件
-    * $\overline{A \cap B} = \overline{A} \cup \overline{B}$
-    * $\overline{\bigcap^{n}_{i=1}A_i} = \bigcup^{n}_{i=1}\overline{A_i}$
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
-<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
+    * <img src="https://latex.codecogs.com/svg.latex?\overline{A \cap B} = \overline{A} \cup \overline{B}"/>
+    * <img src="https://latex.codecogs.com/svg.latex?\overline{\bigcap^{n}_{i=1}A_i} = \bigcup^{n}_{i=1}\overline{A_i}"/>
