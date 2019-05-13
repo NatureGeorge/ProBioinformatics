@@ -141,4 +141,8 @@ foreach my $key ( sort {$cdsINFO_hash{$a} <=> $cdsINFO_hash{$b}} keys %cdsINFO_h
   }
   print OUT "$key,$cdsINFO_hash{$key},@disArray\n";
 }
+
+close IN_1;
+close IN_2;
+close OUT;
 ```
