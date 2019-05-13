@@ -3,8 +3,7 @@
 ## Content
 * Get Target Gene & cdsStart Info Using Hash
 * Get Promoter Region
-* Find Motif
-* Calculate distance
+* Find Motif & Calculate distance
 
 ## Use
 ```perl
@@ -113,7 +112,7 @@ foreach my $key ( sort {$cdsINFO_hash{$a} <=> $cdsINFO_hash{$b}} keys %cdsINFO_h
 ```
 > So far, the whole sequence of Corresponding Promoter Region is stored in $temp_seq.
 
-### Calculate distance
+### Find Motif & Calculate distance
 ```perl
 ...
 # Make Output File
