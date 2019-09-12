@@ -63,6 +63,28 @@
   * SBL
 * 单分子测序技术 (测序长度更长, 以kb为单位)
 
+#### 二代测序特点
+* 单端测序
+* 双端测序
+  * $\le 300bp$
+* Read Mapping (Cost a lot)
+  * Raw FastQ -> Mapped SAM -> Mapped BED
+  * output: SAM/BAM or BED
+  * SAM/BAM (处于alignment阶段)
+  * SAM $\leftrightarrow$ BAM
+  * SAM $\leftrightarrow$ FastQ
+  * BWA
+
+##### ChIP-seq
+```reads``` -> ```alignment``` -> ```signal construction``` -> ```peak calling```
+##### ATCG-seq
+一套数据，两种处理方式,分别得到：
+1. 染色质可及性
+2. 核小体排布
+
+#### 三代测序
+
+
 ### 需注意的问题
 * 基因组测序的覆盖面 $P_0 = e^{-m}$
   * $P_0$: 丢失概率
