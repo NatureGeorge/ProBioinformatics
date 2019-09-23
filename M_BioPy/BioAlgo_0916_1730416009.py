@@ -1,7 +1,7 @@
 # @Date:   2019-09-16T15:54:12+08:00
 # @Email:  1730416009@stu.suda.edu.cn
 # @Filename: BioAlgo_0916_1730416009.py
-# @Last modified time: 2019-09-16T18:32:38+08:00
+# @Last modified time: 2019-09-22T01:36:55+08:00
 import re
 from Bio import Seq
 from Bio.Alphabet import IUPAC
@@ -56,5 +56,5 @@ def getProteinSizeFromDNA(dnaSeq, mode=1):
 if __name__ == '__main__':
     print(getProteinSizeFromDNA('ATGATCTTATGTAATGTCTTATTTATGGTC', mode=1))
     print(getProteinSizeFromDNA('ATGATCTTATGTAATGTCTTATTTATGGTC', mode=2))
+    print(getProteinSizeFromDNA('ATCTTTATCTTATTTGTCTAATAGTGA', mode=1))
     print(getProteinSizeFromDNA('ATCTTTATCTTATTTGTC', mode=1))
-    print(getProteinSizeFromDNA('ATCTTTATCTTATTTGTC', mode=2))
