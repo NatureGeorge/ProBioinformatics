@@ -1,7 +1,7 @@
 # @Date:   2019-09-28T15:43:04+08:00
 # @Email:  1730416009@stu.suda.edu.cn
 # @Filename: BioAlgo_0928_1730416009.py
-# @Last modified time: 2019-10-13T00:27:06+08:00
+# @Last modified time: 2019-10-13T11:38:18+08:00
 
 
 class MyAlign:
@@ -35,6 +35,10 @@ class MyAlign:
         return res
 
     def consensus(self):
+        '''
+        Get the sequence composed of that most frequent character
+        * With equal frequence, select the first one
+        '''
         cons = ""
         for i in range(len(self)):
             cont = {}
@@ -271,7 +275,7 @@ class PairWiseAligner:
         return "%s\n%s\n%s" % (sub_seq_a, "|"*len(sub_seq_b), sub_seq_b)
 
 
-class MultipleAlignment():
+class MultipleAlignment:
     def __init__(self , seqs, alignseq):
         assert isinstance(seqs, list), "seqs should be a list"
         assert isinstance(alignseq, PairWiseAligner), "alignseq should be a PairWiseAligner"
@@ -283,7 +287,7 @@ class MultipleAlignment():
         for i in range(len(alignment.listseqs)+1):
             res.append("")
 
-        cons = alignment.consensus() # !
+        cons = alignment.consensus()
 
         new_score, align2 = self.alignpars.align(cons, seq, mode='global')
 
@@ -325,19 +329,19 @@ class MultipleAlignment():
 if __name__ == "__main__":
     # '''
     seq1 = "ATAGC"
-    seq2 = "AACC"
+    seq2 = "AAGC"
     seq3 = "ATGAC"
-    seq4 = "ATAAC"
+    # seq4 = "ATAAC"
     pwA = PairWiseAligner()
-
+    '''
     for i in "ATCG":
         for j in "ATCG":
             if j == i:
                 pwA.new_matrix((i, j), 1)
             else:
                 pwA.new_matrix((i, j), -1)
-
-    msA = MultipleAlignment([seq1, seq2, seq3, seq4], pwA)
+    '''
+    msA = MultipleAlignment([seq1, seq2, seq3], pwA)
     al = msA.align_consensus()
     print(al)
     # '''
