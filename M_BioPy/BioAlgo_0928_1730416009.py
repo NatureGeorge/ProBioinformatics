@@ -1,7 +1,7 @@
 # @Date:   2019-09-28T15:43:04+08:00
 # @Email:  1730416009@stu.suda.edu.cn
 # @Filename: BioAlgo_0928_1730416009.py
-# @Last modified time: 2019-10-14T16:27:03+08:00
+# @Last modified time: 2019-10-21T14:32:51+08:00
 # from functools import singledispatch
 
 
@@ -11,6 +11,7 @@ class MySeq:
     def __init__(self, seq, seq_type="DNA"):
         self.seq = seq.upper()
         self.seq_type = seq_type
+        # self.validate()
 
     def __len__(self):
         return len(self.seq)
@@ -29,6 +30,27 @@ class MySeq:
 
     def get_seq_biotype(self):
         return self.seq_type
+
+    def alphabet(self):
+        if self.seq_type == "DNA":
+            return "ACGT"
+        elif self.seq_type == "RNA":
+            return "ACGU"
+        elif self.seq_type == "PROTEIN":
+            return "ACDEFGHIKLMNPQRSTVWY"
+        else:
+            return None
+
+    def validate(self):
+        alp = self.alphabet()
+        res = True
+        i = 0
+        while i < len(self.seq) and res:
+            if self.seq[i] not in alp:
+                res = False
+            else:
+                i += 1
+        return res
 
 
 class MyAlign:
@@ -531,7 +553,7 @@ class UPGMA:
     def create_mat_dist(self):
         self.matdist = NumMatrix(len(self.seqs), len(self.seqs))
         for i in range(len(self.seqs)):
-            for j in range(i+1, len(self.seqs)):
+            for j in range(i + 1, len(self.seqs)):
                 s1 = self.seqs[i]
                 s2 = self.seqs[j]
                 _, alin = self.alseq.align(s1, s2, mode="global")
@@ -546,7 +568,7 @@ class UPGMA:
     def aln_create_mat_dist(self):
         self.matdist = NumMatrix(len(self.seqs), len(self.seqs))
         for i in range(len(self.seqs)):
-            for j in range(i+1, len(self.seqs)):
+            for j in range(i + 1, len(self.seqs)):
                 s1 = self.seqs[i]
                 s2 = self.seqs[j]
                 alin = MyAlign([s1, s2])
