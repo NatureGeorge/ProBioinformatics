@@ -1,7 +1,7 @@
 # @Date:   2019-10-21T14:15:14+08:00
 # @Email:  1730416009@stu.suda.edu.cn
 # @Filename: BioAlgo_1021_1730416009.py
-# @Last modified time: 2019-10-21T17:58:10+08:00
+# @Last modified time: 2019-11-03T19:52:31+08:00
 # import sys
 # sys.append("./")
 from BioAlgo_0928_1730416009 import MySeq
@@ -48,7 +48,7 @@ class DeterministicMotifFinding:
 
     def score(self, s):
         score = 0
-        mat = self .create_motif_from_indexes(s)
+        mat = self.create_motif_from_indexes(s)
         for j in range(len(mat[0])):
             maxcol = mat[0][j]
             for i in range(1, len(mat)):
@@ -65,7 +65,7 @@ class DeterministicMotifFinding:
             for i in range(1, len(mat)):
                 if mat[i][j] > maxcol:
                     maxcol = mat[i][j]
-            score *= maxcol
+            score = score * maxcol
         return score
 
     def next_solution(self, s):
