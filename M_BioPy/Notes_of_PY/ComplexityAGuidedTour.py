@@ -1,16 +1,16 @@
 # @Date:   2019-11-03T16:45:17+08:00
 # @Email:  1730416009@stu.suda.edu.cn
 # @Filename: ComplexityAGuidedTour.py
-# @Last modified time: 2019-11-03T17:08:57+08:00
+# @Last modified time: 2019-11-04T10:17:12+08:00
 import numpy as np
 from enum import IntEnum, unique
 import random
-'''
-import pandas as pd
+from multiprocessing.dummy import Pool
+# import multiprocessing as mp
+# import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 sns.set_style("darkgrid")
-'''
 
 
 @unique
@@ -55,8 +55,8 @@ class Robe:
             self.genes = Robe.create_individual(length, string)
         else:
             self.genes = genes
-        self.finalScore = []
-        self.finalPosition = []
+        # self.finalScore = []
+        # self.finalPosition = []
         if go:
             self.multiGo()
             self.avgScore = self.getAvgScore()
@@ -143,16 +143,26 @@ class Robe:
             position, curScore = Robe.score(task, position, newPosition, pick)
             s += curScore
             step += 1
-        self.finalScore.append(s)
-        self.finalPosition.append(position)
+        # self.finalScore.append(s)
+        # self.finalPosition.append(position)
+        return s
 
     def generateTask(size=10):
         return np.array([[random.randint(0, 1) for i in range(size)] for j in range(size)])
 
     def multiGo(self, num=100):
+        def register(task):
+            return self.go(task)
+
+        pool = Pool(processes=20)
+
         self.tasks = [Robe.generateTask() for i in range(num)]
+        """
         for task in self.tasks:
             self.go(task)
+        """
+        self.finalScore = pool.map(register, self.tasks)
+        pool.close()
 
     def getAvgScore(self):
         return sum(self.finalScore) / len(self.finalScore)
@@ -162,15 +172,39 @@ class RobeGroup:
     Count = 1
 
     def __init__(self, group=None, num=200):
+
+        # self.group = []
+        # self.scores = []
+        pool = Pool(processes=20)
+        # queue = mp.Queue()
+
+        def register(genes):
+            # self.group.append(Robe(True, genes=genes))
+            return Robe(True, genes=genes)
+            # queue.put(Robe(True, genes=genes))
+
         if group is None:
-            self.group = [Robe(True) for i in range(num)]
-        else:
-            self.group = [Robe(True, genes=genes) for genes in group]
+            # self.group = [Robe(True) for i in range(num)]
+            group = [None]*num
+        # else:
+            # self.group = [Robe(True, genes=genes) for genes in group]
+        self.group = pool.map(register, group)
+        pool.close()
+        """
+        process = mp.Process(target=register, args=(queue, group, ))
+        process.start()
+        process.join()
+        while not queue.empty():
+            res = queue.get()
+            self.group.append(res)
+            self.scores.append(res.avgScore)
+        """
+
         self.scores = [robe.avgScore for robe in self.group]
         max_s, min_s = max(self.scores), min(self.scores)
         self.normScores = np.array(
             [(score - min_s) / (max_s - min_s) for score in self.scores])
-        self.prob = self.normScores / self.normScores.sum()
+        self.prob = (self.normScores / self.normScores.sum()).tolist()
         print("RobeGroup: New Group [%s]" % RobeGroup.Count)
         RobeGroup.Count += 1
 
@@ -178,6 +212,9 @@ class RobeGroup:
         np.random.seed()
         self.parent = np.random.choice(
             self.group, p=self.prob, size=2, replace=False)
+
+    def selectBest(self):
+        return self.group[self.prob.index(max(self.prob))]
 
     def getChild12(self):
         parent1, parent2 = self.parent[0], self.parent[1]
@@ -187,8 +224,9 @@ class RobeGroup:
         self.children.append(child1)
         self.children.append(child2)
 
-    def getChildren(self, pairs=100):
-        self.children = []
+    def getChildren(self, pairs=99):
+        self.best = self.selectBest().genes
+        self.children = [self.best, self.best]
         for i in range(pairs):
             self.selectParent()
             self.getChild12()
@@ -209,12 +247,20 @@ def demo(num=99):
     max_scores = []
     initial = RobeGroup()
     max_scores.append(max(initial.scores))
+    new = initial
     for i in range(num):
-        new = RobeGroup(group=initial.getChildren())
-        max_scores.append(max(new.scores))
+        new = RobeGroup(group=new.getChildren())
+        maxNew = max(new.scores)
+        print(maxNew)
+        max_scores.append(maxNew)
     return max_scores, initial, new
 
 
 if __name__ == "__main__":
-    max_scores, initial, new = demo()
+    max_scores, initial, new = demo(2)
+    print([robe.genes for robe in new.group])
     print(max_scores)
+    plt.figure(figsize=(10, 8))
+    a = plt.plot(list(range(len(max_scores))), max_scores)
+    plt.show()
+    plt.savefig('./Robe.png')

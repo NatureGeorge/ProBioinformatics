@@ -1,6 +1,8 @@
 # Concepts Related to Genomics
 > Last Modified Time 2019-09-05
 
+[toc]
+
 ## Genome Map
 
 ### Genetic Mapping
@@ -76,7 +78,10 @@
   * BWA
 
 ##### ChIP-seq
+> 染色质免疫共沉淀
+
 ```reads``` -> ```alignment``` -> ```signal construction``` -> ```peak calling```
+
 ##### ATCG-seq
 一套数据，两种处理方式,分别得到：
 1. 染色质可及性
@@ -104,3 +109,94 @@
 * ART
 * Wessim
 * ...
+
+
+## 序列组装（Genome Assembly）
+### 原理
+* Multiple copies of Genome
+* (碎片化)
+* Sheared random fragments
+* (电泳过滤)
+* Size fractionated fragments
+* (BAC/YAC)
+* 建库
+* Reads (双末端测序)
+* (Overlap)
+* Contigs
+* Scaffolds (mate-pair reads)
+
+### 组装策略
+* 从头组装
+  * 可以发现基因组装中...
+  * 基因组的覆盖度容易受到非编码区域重复序列变化的影响
+  * 重复序列也在基因组装配形成重叠群时产生歧义
+* 有参组装 (但无法解释可变剪切)
+  * ...
+
+#### 二组学的组装
+_基因组组装与转录组组装的方法不一样_
+Difference：
+1. 基因组的测序深度在基因组中通常(?)是相同的 (例外@GC偏移)
+2. 在基因组测序中两条链都会被测序
+3. 转录组的测序深度可能变化很大
+4. RNA-seq 是链特异性的
+5. 歧义问题： 同一个基因的不同转录变异体其中有共同的外显子
+
+### 组装遇到的难点
+* 测序错误
+* 重复序列
+* 多态性变异
+* 倒位
+* 覆盖率
+
+### 组装软件
+* 转录组: Trinity
+  > de novo transcriptome assembly from RNA-Seq data. Trinity assembles transcript sequences from Illumina RNA-Seq data.
+* 转录组: TopHat
+  > TopHat is a fast splice junction mapper for RNA-Seq reads. It aligns RNA-Seq reads to mammalian-sized genomes using the ultra high-throughput short read aligner Bowtie, and then analyzes the mapping results to identify splice junctions between exons.
+* 基因组: Bowtie/Bowtie2
+* 基因组: SOAPDenovo
+
+### 组装算法
+__Greedy Algotithm__
+* De novo
+  * Hamilton path
+* 比较组装
+  * Eulerian path
+
+> SSAKE
+
+#### 算法流程1
+1. Overlap Discovery (所有Reads 两两比较)
+2. 启发式算法
+  * K-mer size
+  * Minimum overlap length
+  * Minimum ..
+  * 参数越大，组装越精确但contigs也越短
+3. overlap graph 的
+4. 多序列比对，确定readout
+
+#### 算法思想1
+* 把每个Reads看作一个节点
+* 若两reads存在overlap(符合阈值)， 就在相应节点之间建立一条边
+* 所有reads通过overlap关联，构造有向图
+* 通过寻找图中经过每个节点一次且仅一次的路径
+
+#### 算法流程2
+> de Bruijn graph
+
+1. 构建k-mers
+2. k-mer 之间
+
+##### 问题
+1. 错误Reads
+2. 分支问题 (需过滤)
+3. Gaps
+
+
+#### 算法思想2
+
+### 基因组建模 (20191114)
+
+#### ```GT...AG``` Rule
+> 用以识别内含子范围:前体RNA中参与内含子剪接的两个特殊位点，即在内含子和外显子交界处有两个相当短的保守序列:5'端为GT, 3'端为 AG,称为GT-AG规律。GT-AG规则主要适用于(或是全部)真核生物基因的剪接位点。

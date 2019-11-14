@@ -1,7 +1,7 @@
 # @Date:   2019-10-24T13:36:27+08:00
 # @Email:  1730416009@stu.suda.edu.cn
 # @Filename: 1024_script.sh
-# @Last modified time: 2019-10-24T15:07:34+08:00
+# @Last modified time: 2019-10-31T08:20:09+08:00
 
 # 文件准备
 # 1. 基因组序列： .fa + .gff
@@ -33,9 +33,26 @@ Adding sequences from FASTA; added 17 sequences in 0.468456 seconds.
 tblastn -query $unpFastaFile -db SC_gDNA -out ./blastx_results.outfmt6 -evalue 1e-5 -outfmt 6 -max_target_seqs 1 -num_threads 10
 tblastn -query $unpFastaFile -db SC_gDNA -out ./blastx_results.outfmt7 -evalue 1e-5 -outfmt 7 -max_target_seqs 1 -num_threads 10
 
-# 使用 blast92gff3.pl 和 blast2gff.py 程序，分别把结果转成 GFF3 格式；
-blast92gff3.pl Sc_blastx_results.outfmt6 > Sc_perl.gff3
-blast2gff.py -b Sc_blastx_results.outfmt6 > Sc_python.gff3
+tblastn -query ./protein.fasta -db Sc_gDNA -out ./blastx_results.outfmt6 -evalue 1e-5 -outfmt 6 -max_target_seqs 1 -num_threads 10
+tblastn -query ./protein.fasta -db Sc_gDNA -out ./blastx_results.outfmt7 -evalue 1e-5 -outfmt 7 -max_target_seqs 1 -num_threads 10
 
+
+# 使用 blast92gff3.pl 和 blast2gff.py 程序，分别把结果转成 GFF3 格式；
+perl blast92gff3.pl blastx_results.outfmt6 > Sc_perl.gff3
+
+```
+# Summary of HSPs saved
+# ALL saved = 26119
+# other saved = 26119
+```
+
+python2 blast2gff.py -b blastx_results.outfmt6 > Sc_python.gff3
+
+```
+Starting BLAST parsing on blastx_results.outfmt6 Thu Oct 31 08:19:43 2019
+Parsed 26780 lines Thu Oct 31 08:19:44 2019
+Found 13001 forward and 13779 reverse hits Thu Oct 31 08:19:44 2019
+Wrote 26780 matches Thu Oct 31 08:19:44 2019
+```
 # 比较两个程序转换结果的异同之处；
 # 排除 blast 比对结果中的冗余项：【可选内容，视完成度加分，最多加 10 分】 （1）不同物种的同源蛋白在基因组上的匹配位置存在的重叠问题； （2）同一蛋白家族的不同成员在基因组上的匹配位置存在的重叠问题； （3）同一个蛋白在基因组上的不同位置的高相似区域问题；
