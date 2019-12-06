@@ -103,7 +103,7 @@ class HMMPredProm:
         else:
             pass
 
-        record = {}
+        recordDict = {}
         start = perf_counter()
         
         seq_len = len(seq)
@@ -114,16 +114,16 @@ class HMMPredProm:
             m -= x
         
         try:
-            while len(record) < min(self.bootstrapNum, allPosNum):
+            while len(recordDict) < min(self.bootstrapNum, allPosNum):
                 seq_var = list(seq)
                 self.seq = seq
                 shuffle(seq_var)
                 seq_var = ''.join(seq_var)
-                if seq_var in record.keys():
+                if seq_var in recordDict.keys():
                     self.checkRunTime(start)
                     continue
                         
-                record[seq_var] = self.scoreSeq(seq_var, inb=True)
+                recordDict[seq_var] = self.scoreSeq(seq_var, inb=True)
                 self.checkRunTime(start)
         except RuntimeError:
             print("skip")
