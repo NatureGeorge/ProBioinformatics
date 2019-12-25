@@ -21,7 +21,7 @@
 
 * Link: <https://www.wolfram.com/engine/free-license/>
 
-## Intergrate with `Jupyter Notebook`
+## Integrate with `Jupyter Notebook`
 
 > for display
 
@@ -29,7 +29,8 @@
 
 ![fig](docs/figs/wolframscript_screenshot_191216.png)
 ![fig](docs/figs/wolframscript_jp_screenshot_191216.png)
-## Intergrate with `VS Code`
+
+## Integrate with `VS Code`
 
 > for programming
 

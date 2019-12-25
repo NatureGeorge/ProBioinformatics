@@ -14,14 +14,14 @@ WEIGHTED = {
     "G": [0.00, -2.74, -4.28, -4.61, -3.77, -4.73, -2.65, -1.50, 0.00, 0.00, -0.09, 0.00, 0.00, 0.00, 0.00],
     "T": [-1.68, 0.00, -2.28, 0.00, -2.34, -0.52, -3.65, -0.37, -1.40, -0.97, -1.40, -0.82, -0.66, -0.54, -0.61]}
 
-WEIGHT_HMM = {
+WEIGHT = {
     "A": [61, 16, 352, 3, 354, 268, 360, 222, 155, 56, 83, 82, 82, 68, 77],
     "C": [145, 46, 0, 10, 0, 0,	3, 2, 44, 135, 147, 127, 118, 107, 101],
     "G": [152, 18, 2, 2, 5, 0, 20, 44, 157,150, 128, 128, 128, 139, 140],
     "T": [31,309, 35, 374, 30, 121, 6, 121, 33, 48, 31, 52,	61,	75,	71]
     }
 
-WEIGHT = {
+WEIGHT_HMM = {
     'A': [21.4, 15.9, 3.7, 91.1, 0.0, 94.5, 67.3, 97.3, 52.1, 40.7, 16.5, 23.6],
     'C': [22.7, 39.3, 9.8, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 9.1, 34.8, 37.1],
     'G': [28.2, 35.2, 2.9, 0.0, 0.0, 0.0, 0.0, 2.7, 12.0, 40.2, 38.0, 30.4],
@@ -156,14 +156,19 @@ class HMMPredProm:
         result = defaultdict(list)
         for count, (name, seq) in enumerate(seqs):
             
+            seq_len = len(seq)
+            
             if reverse:
                 seq = reverseCom(seq)
-            
+                def index_func(x): return seq_len - index
+            else:
+                def index_func(x): return x+1
+
             subSeqs = self.subSeq(seq)
-            for index, sseq in tqdm(subSeqs, total=len(seq)-self.length+1):
+            for index, sseq in tqdm(subSeqs, total=seq_len-self.length+1):
                 sp = self.scoreSeq(sseq)
                 if sp[1] is not None:
-                    result[name].append((index, *sp))
+                    result[name].append((index_func(index), *sp))
             print(name)
             
             if count+1 == self.chroNum:
@@ -219,12 +224,14 @@ if __name__ == '__main__':
                         default='C:/OmicData/YJM1342/')
     parser.add_argument('-r', '--reverse', type=bool,
                         default=True)
+    parser.add_argument('-t', '--tage', type=str,
+                        default='')
     args = parser.parse_args()
     test = HMMPredProm(args.fasta, chroNum=args.chroNum, bootstrapNum=args.bootstrapNum, pValue=args.pValue)
     
     resultDict = test.filteringResult(test.pValue, test.main())
     fin = test.toDataFrame(resultDict)
-    outputPath = os.path.join(args.outputFolder, "output_50.gff3")
+    outputPath = os.path.join(args.outputFolder, "output_%s_%s.gff3" % (args.bootstrapNum, args.tage))
     
     with open(outputPath, 'w+') as out:
         out.write("##gff-version 3\n")
@@ -233,7 +240,7 @@ if __name__ == '__main__':
     if args.reverse:
         resultDict = test.filteringResult(test.pValue, test.main(reverse=True))
         fin = test.toDataFrame(resultDict, '-')
-        outputPath = os.path.join(args.outputFolder, "output_reverse_50.gff3")
+        outputPath = os.path.join(args.outputFolder, "output_reverse_%s_%s.gff3" % (args.bootstrapNum, args.tage))
 
         with open(outputPath, 'w+') as out:
             out.write("##gff-version 3\n")
