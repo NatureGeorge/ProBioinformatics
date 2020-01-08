@@ -5,10 +5,10 @@
 ## Epigenetic Landscape
 
 * DNA-methylation
-* Nucleosome position
-* TF Binding
+* Nucleosome position (MNase-Seq, ATAT-Seq)
+* TF Binding (ChIP-Seq? DNase-Seq/FAIRE-Seq? ATAT-Seq?)
 * Histone Modification
-* Chromatin accessibility
+* Chromatin accessibility (ATAT-Seq)
 * Higher order chromatin interactions
 * Non-coding RNA
 * ...
@@ -35,6 +35,12 @@
 
 ### Histone Modification
 
+* 甲基化
+* 磷酸化
+* 乙酰化
+* 泛素化
+* 磺酰化
+
 #### Histone Code
 
 Code | Description | Location
@@ -46,6 +52,10 @@ H3K7?me3 | __Repress__ |?
 H3K4me3 | Activate | Promoter
 H3K9ac | Activate | ?
 H3K4me2 | Activate | Promoter,Enhancer
+
+* Gene Body: H3K9me3(Repress)
+* Promoter: H3K27me3(Repress) H3K4me2/3(Activate)
+* Enhancer: H3K27ac(Activate) H3K4me2/1(Acivate)
 
 > 位于组蛋白N末端, 不仅存在于H3上
 
@@ -146,13 +156,17 @@ Info:
 ### DNase-Seq, MNase-Seq
 
 * DNase-Seq: identify the location of regulatory regions
+  * 限制性内切酶 (DNase I)
   * 实验难做
   * 酶切时间不好控制
-  * 细胞量要求大
+  * 细胞量要求大，也可单细胞
+  * 在染色质致密区域，DNA链被致密结构很好地保护起来，使得内切酶无法接近这些区域，只能切割开放区域的DNA。同样，在开放区域，缠绕在核小体上的DNA被核小体结构所保护，只有核小体之间的DNA序列能够被DNase I切割，这些区域内能够被DNase切割的位点也被称为DHS，即DNase超敏感位点（DNase hypersensitive sites）
 * MNase-Seq: 核小体排布,
   > __DNase-seq__ is DNase I digestion combined with high-throughput DNA sequencing to get sites of digestion at single base-pair resolution. It’s kind of the "yin" to MNase-seq’s "yang", providing inferred info on chromatin-binding proteins that lie between hypersensitive sites, whereas __MNase-seq__ maps protected regions. Both methods require another technique, such as ChIP-seq, for identifications of bound elements, though. (<https://epigenie.com/three-ways-to-get-intimate-with-epigenetic-marks/)>
+  * 限制性外切酶
+  * 和DNase-seq原理类似，探测区域互补；MNase-seq使用的酶是限制性外切酶，将不受保护的区域统统切除，只余下核小体上缠绕的DNA序列
   * MNase-Seq数据 不能用Macs call peak
-
+  * 细胞量要求大
 * FAIRE-Seq
   > FAIRE-Seq (Formaldehyde-Assisted Isolation of Regulatory Elements) is a method in molecular biology used for determining the sequences of DNA regions in the genome associated with regulatory activity. The technique was developed in the laboratory of Jason D. Lieb at the University of North Carolina, Chapel Hill. In contrast to DNase-Seq, the FAIRE-Seq protocol doesn't require the permeabilization of cells or isolation of nuclei, and can analyse any cell type. In a study of seven diverse human cell types, __DNase-seq and FAIRE-seq produced strong cross-validation__, with each cell type having 1-2% of the human genome as open chromatin.
   * 使用甲醛固定
@@ -193,3 +207,8 @@ ATAC-Seq与ChIP-Seq的不同的是ATAC-Seq是全基因组范围内检测染色�
 * Large Genomic Domains Occupied by Master Transcription Factors and Mediator in ESCs
 * Super-Enhancers Are Associated with Key ESC Identity Genes
 * Super-Enhancers Are Cell-Type Specific and Mark Key Cell Identity Genes
+
+## Reference👩‍💻
+
+1. 📺 [StatQuest: A gentle introduction to ChIP-Seq](https://www.youtube.com/watch?v=nkWGmaYRues)
+2. 📺 [MIT 7.91J: 7. ChIP-seq Analysis; DNA-protein Interactions](https://www.youtube.com/watch?v=Ob9xGBPvr_s)
