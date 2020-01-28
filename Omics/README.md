@@ -31,7 +31,6 @@ Author: ZeFeng Zhu👨‍💻
 
 * [📺 Thread](https://www.youtube.com/watch?v=ZYW2AeDE6wU)
 
-<iframe width="699" height="393" src="https://www.youtube.com/embed/ZYW2AeDE6wU?list=PLUl4u3cNGP63uK-oWiLgO7LLJV6ZCWXac" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## 7. ChIP-seq Analysis; DNA-protein Interactions
 
