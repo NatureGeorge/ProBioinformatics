@@ -208,7 +208,7 @@ graph tree3 {
   * 数据平移 (2种平移方式，前者处理越大越好的数据，后者处理越小越好的数据，最终都是越大越好)
     * $x_{ij}=\cfrac{x_{ij}-\min(x_{1j},...,x_{mj})}{\max(x_{1j},...,x_{mj})-\min(x_{1j},...,x_{mj})}+1$
     * $x_{ij}=\cfrac{\max(x_{1j},...,x_{mj})-x_{ij}}{\max(x_{1j},...,x_{mj})-\min(x_{1j},...,x_{mj})}+1$
-* 白话算法思路: 计算出每列的Entropy, Entropy大的权重越大
+* 算法思路: 计算出每列的Entropy, Entropy越小的权重越大
   * 其中possibility: $p_{ij}=\cfrac{x_{ij}}{\sum_{i}^{m}x_{ij}}$
   * entropy: $e_{j}=-\sum_{i}^{m}p_{ij}\ln(p_{ij}) \rightarrow e_{j}=\cfrac{e_{j}}{\ln{m}} \Leftrightarrow e_{j}=-\cfrac{1}{\ln{m}}\sum_{i}^{m}p_{ij}\ln(p_{ij})$
     * 多一个系数$\ln{m}$代表着m种情况都均等概率(默认概率和必为1)时的entropy值，此时的entropy最大(离散程度最低)，此系数保证计算出的值在0-1内
