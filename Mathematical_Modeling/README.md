@@ -196,3 +196,22 @@ graph tree3 {
 2. [📺 Shannon Entropy and Information Gain](https://www.bilibili.com/video/av73032356?p=1)
 3. [📺 Khan Academy | Shannon Entropy](https://www.bilibili.com/video/av73032356?p=2)
 4. [📺 KL Divergence](https://www.bilibili.com/video/av73032356?p=4)
+
+#### Application in Multi-Criteria Decision-Making
+
+* 熵值法可以作为一种客观赋权方法
+* 设有m个待评方案(样本Sample)，n项评价指标(特征Feature)，形成元素指标数据矩阵$X=(x_{ij})_{m\times n}$
+* 根据熵的特性，可以通过计算熵值来判断一个方案的随机性及无序程度，也可以用熵值来判断某指标的离散程度，指标的离散程度越大，该指标对于综合评价的影响越大
+* Data Preprocessing
+  * 量纲不影响，无需标准化
+  * 数据非负化处理
+  * 数据平移 (2种平移方式，前者处理越大越好的数据，后者处理越小越好的数据，最终都是越大越好)
+    * $x_{ij}=\cfrac{x_{ij}-\min(x_{1j},...,x_{mj})}{\max(x_{1j},...,x_{mj})-\min(x_{1j},...,x_{mj})}+1$
+    * $x_{ij}=\cfrac{\max(x_{1j},...,x_{mj})-x_{ij}}{\max(x_{1j},...,x_{mj})-\min(x_{1j},...,x_{mj})}+1$
+* 白话算法思路: 计算出每列的Entropy, Entropy大的权重越大
+  * 其中possibility: $p_{ij}=\cfrac{x_{ij}}{\sum_{i}^{m}x_{ij}}$
+  * entropy: $e_{j}=-\sum_{i}^{m}p_{ij}\ln(p_{ij}) \rightarrow e_{j}=\cfrac{e_{j}}{\ln{m}} \Leftrightarrow e_{j}=-\cfrac{1}{\ln{m}}\sum_{i}^{m}p_{ij}\ln(p_{ij})$
+    * 多一个系数$\ln{m}$代表着m种情况都均等概率(默认概率和必为1)时的entropy值，此时的entropy最大(离散程度最低)，此系数保证计算出的值在0-1内
+  * 差异系数: $g_{j}=1-e_{j}$
+  * weight: $w_{j}=\cfrac{g_{j}}{\sum_{j}^{n}g_{j}}$
+  * score: $s_{i}=\sum_{j}^{n}w_{j}*p_{ij}$
